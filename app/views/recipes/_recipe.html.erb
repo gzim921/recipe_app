@@ -1,0 +1,21 @@
+<div class="modal is-active">
+  <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+          <ol>
+            <% @recipes.each do |recipe| %>
+              <li><%= link_to recipe.title, "/recipes/#{recipe.id}", class: "modal-card-title" %> </li>
+            <% end %>
+          </ol> 
+        <button class="delete" aria-label="close"></button>
+      </header>
+    <section class="modal-card-body">
+      <!-- Content ... -->
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success"><%= link_to "Back", root_path, class: "button is-success" %></button>
+      
+      <button><%= link_to "Edit", class: "button" %></button>
+    </footer>
+  </div>
+</div>
