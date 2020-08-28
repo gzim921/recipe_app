@@ -1,0 +1,4 @@
+<%= form_with model: @recipe, local: true do |form| %>
+  <%= render "components/instructions", form: form %>
+  <%= form.submit 'Update instructions' %>
+<% end %>

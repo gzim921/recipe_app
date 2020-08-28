@@ -1,0 +1,5 @@
+
+    <%= form_with model: @recipe, local: true do |form| %>
+      <%= render "components/ingredients", form: form %>
+      <%= form.submit 'Update ingredients' %>
+    <% end %>
