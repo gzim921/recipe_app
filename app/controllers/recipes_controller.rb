@@ -12,6 +12,7 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+
     5.times { @recipe.ingredients.build }
     5.times { @recipe.instructions.build }
   end
@@ -51,6 +52,7 @@ class RecipesController < ApplicationController
   def destroy
     @recipe = Recipe.find(params[:id])
     @recipe.destroy
+
     redirect_to root_path
   end
 

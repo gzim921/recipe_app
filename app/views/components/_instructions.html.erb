@@ -1,7 +1,8 @@
   
 <%= form.fields_for :instructions do |f| %>
-  <%= f.label :body, class: "sr-only" %>
-  <%= f.text_field :body, class: "form-control form-color", placeholder: "Instruction" %>
+  <%= f.label :Instructions, class: "control" %>
+  <%= f.text_field :body, class: "input is-success", placeholder: "Instruction" %>
   <%= f.check_box :_destroy %>
-  <%= f.label "Delete", class: 'text-white' %>
+  <%= f.label "Delete", class: 'button is-danger is-rounded' %>
 <% end %>
+<br>

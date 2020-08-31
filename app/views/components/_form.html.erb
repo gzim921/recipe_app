@@ -1,39 +1,70 @@
-<%= form_with model: model, local: true do |form| %>
+<div class="container">
+  <div class="columns is-multiline">
+    <div class="column is-6 is-offset-3">
+      <div class="content is-size-3">
+        <%= form_with model: model, local: true do |form| %>
+          <p class="title is-1"><%= heading if local_assigns[:nested_form] %></p>
+          
+            <% unless local_assigns[:nested_form] %>
+              <%= form.label :user_name, class: "sr-only " %>
+              <%= form.text_field :user_name, class: "form-control form-color mt-2", placeholder: "Full name" %>
 
-    <h1><%= heading if local_assigns[:nested_form] %></h1>
-    
-      <% unless local_assigns[:nested_form] %>
-        <%= form.label :full_name, class: "sr-only " %>
-        <%= form.text_field :full_name, class: "form-control form-color mt-2", placeholder: "Full name" %>
-        <%= form.label :first_name, class: "sr-only" %>
-        <%= form.text_field :first_name, class: "form-control form-color mt-2", placeholder: "First name" %>
-        <%= form.label :last_name, class: "sr-only" %>
-        <%= form.text_field :last_name, class: "form-control form-color mt-2", placeholder: "Last name" %>
-        <%= form.label :email, class: "sr-only" %>
-        <%= form.email_field :email, class: "form-control form-color mt-2", placeholder: "Email adress" %>
-        <%= form.label :password, class: "sr-only" %>
-        <%= form.password_field :password, class: "form-control form-color mt-2", placeholder: "Password" %>
-        <%= form.label :password_confirmation, class: "sr-only" %>
-        <%= form.password_field :password_confirmation, class: "form-control form-color mt-2", placeholder: "Confirm password" %>
-      <% else %>
-        <%= render 'components/errors', model: model %>
-        <%= form.label :title, class: "sr-only" %>
-        <%= form.text_field :title, class: "form-control form-color", placeholder: "Title" %>
-        <%= form.label :description, class: "sr-only" %>
-        <%= form.text_area :description, class: "form-control form-color mt-4", placeholder: "Description" %>
-        <div class='row'>
-          <div class="col-sm-5 mt-4 ml-5">
-            <%= render "components/ingredients", form: form %>
-          </div>
-          <div class="col-sm-5 mt-4 ml-5">
-            <%= render "components/instructions", form: form %>
-          </div>
-        </div>
-      <% end %>
+              <%= form.label :first_name, class: "sr-only" %>
+              <%= form.text_field :first_name, class: "form-control form-color mt-2", placeholder: "First name" %>
+
+              <%= form.label :last_name, class: "sr-only" %>
+              <%= form.text_field :last_name, class: "form-control form-color mt-2", placeholder: "Last name" %>
+
+              <%= form.label :email, class: "sr-only" %>
+              <%= form.email_field :email, class: "form-control form-color mt-2", placeholder: "Email adress" %>
+
+              <%= form.label :password, class: "sr-only" %>
+              <%= form.password_field :password, class: "form-control form-color mt-2", placeholder: "Password" %>
+
+              <%= form.label :password_confirmation, class: "sr-only" %>
+              <%= form.password_field :password_confirmation, class: "form-control form-color mt-2", placeholder: "Confirm password" %>
+
+            <% else %>
+              <%= render 'components/errors', model: model %>
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <%= form.label :title, class: "label" %>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <%= form.text_field :title, class: "input", placeholder: "Title" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <%= form.label :description, class: "label" %>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <%= form.text_area :description, class: "input", placeholder: "Description" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class='field'>
+                <div class="control">
+                  <%= render "components/ingredients", form: form %>
+                </div>
+                <br>
+                <div class="control">
+                  <%= render "components/instructions", form: form %>
+                </div>
+              </div>
+            <% end %>
+          <span>
+            <%= form.submit button_name, class: "button is-success is-active" %>
+          </span>
+        <%end%>
+      </div>
     </div>
-    <br>
   </div>
-  <div class="container">
-    <%= form.submit button_name, class: "btn btn-lg recipe-faded btn-block font-italic"%>
-  </div>
-<%end%>
+</div>
