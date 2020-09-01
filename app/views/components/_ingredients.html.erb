@@ -1,5 +1,5 @@
 <%= form.fields_for :ingredients do |f| %>
-  <%= f.label :Ingredients, class: "control" %>
+  
   <%= f.text_field :body, class: "input is-success", placeholder: "Ingredient" %>
   <%= f.check_box :_destroy %>
   <%= f.label "Delete", class: 'button is-danger is-rounded' %>
