@@ -1,13 +1,14 @@
 class RecipesController < ApplicationController
+  skip_before_action :require_login, only: [:index, :show]
   before_action :find_recipe, only: [:show, :edit, :update, :destroy]
   before_action :find_recipe_with_recipe_id, only: [:edit_ingredients, :edit_instructions]
-  
+  before_action :correct_user?, except: [:index, :show, :new, :create]
+
   def index
     @recipes = Recipe.all
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
   end
 
   def new
@@ -19,6 +20,7 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.user = current_user
 
     if @recipe.save
       redirect_to root_path
@@ -41,7 +43,7 @@ class RecipesController < ApplicationController
   end
 
   def update
-    @recipe.update_attributes(recipes_params)
+    @recipe.update_attributes(recipe_params)
     if @recipe.save
       redirect_to user_recipe_path(@recipe.user, @recipe)
     else
@@ -50,7 +52,6 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
     @recipe.destroy
 
     redirect_to root_path
@@ -70,5 +71,12 @@ class RecipesController < ApplicationController
 
   def find_recipe_with_recipe_id
     @recipe = Recipe.find(params[:recipe_id])
+  end
+
+  def correct_user?
+    unless equal_with_current_user?(@recipe.user)
+      flash[:warning] = 'Wrong user!'
+      redirect_to user_path(@current_user) and return
+    end
   end
 end
