@@ -9,16 +9,16 @@ module SessionsHelper
     end
   end
 
-  def logged_in?
+  def current_user_present?
     current_user.present?
+  end
+
+  def equal_with_current_user(user)
+    user == current_user
   end
 
   def log_out
     session.delete(:user_id)
     @current_user = nil
-  end
-
-  def equal_with_current_user?(user)
-    user == current_user
   end
 end

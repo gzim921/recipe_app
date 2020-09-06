@@ -1,12 +1,13 @@
-
-<% if model.errors.any? %>
-  <div class="container text-center text-white font-italic">
-    <div class="alert alert-error recipe-faded mt-1">
+<article class="message is-danger">
+  <% if model.errors.any? %>
+    <div class="message-header">
       <h4>Warning!</h4>
+    </div>
+    <div class="message-body">
       <p><%= pluralize(model.errors.count, "error") %> prohibited this from being saved:</p>
       <% model.errors.full_messages.each do |errors| %>
         <li><%= errors %></li>
       <% end %>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</article>

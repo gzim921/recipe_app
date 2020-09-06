@@ -1,5 +1,7 @@
-
-    <%= form_with model: @recipe, local: true do |form| %>
-      <%= render "components/ingredients", form: form %>
-      <%= form.submit 'Update ingredients' %>
-    <% end %>
+<div class="container">
+  <h1 class="title">Edit ingredients</h1>
+  <%= form_with model: @recipe, local: true do |form| %>
+    <%= render "components/ingredients", form: form %>
+    <%= form.submit 'Update ingredients', class: "card-footer-item" %>
+  <% end %>
+</div>

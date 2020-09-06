@@ -1,6 +1,8 @@
 <%= form.fields_for :ingredients do |f| %>
-  
-  <%= f.text_field :body, class: "input is-success", placeholder: "Ingredient" %>
+  <%= f.label :Ingredient, class: "sr-only" %>
+  <%= f.text_field :body, class: "input", placeholder: "Ingredient" %>
   <%= f.check_box :_destroy %>
-  <%= f.label "Delete", class: 'button is-danger is-rounded' %>
+  <%= f.label "Delete", class: 'text-white' %>
 <% end %>
+<br>
+

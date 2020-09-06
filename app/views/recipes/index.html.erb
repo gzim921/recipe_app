@@ -1,10 +1,13 @@
-<div class="container">
-  <div class="columns is-multiline">
-    <div class="column is-6 is-offset-3">
-      <div class="content is-size-3">
-        <h3 class="title is-3">All Recipes</h3>
-      </div>
-    </div>
-    <%= render @recipes %>
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    <h1 class="title"><strong>All recipes</strong></h1>
   </div>
 </div>
+<div class="columns">
+  <% @recipes.each do |recipe|%>
+    <div class="column is-three-fifths is-offset-one-fifth">
+      <%= render 'recipe', recipe: recipe %>
+    </div>
+  <%end %>
+<div>
+

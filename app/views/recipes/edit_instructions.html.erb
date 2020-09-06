@@ -1,4 +1,7 @@
-<%= form_with model: @recipe, local: true do |form| %>
-  <%= render "components/instructions", form: form %>
-  <%= form.submit 'Update instructions' %>
-<% end %>
+<div class="container">
+  <h1 class="title">Edit instructions</h1>
+  <%= form_with model: @recipe, local: true do |form| %>
+    <%= render "components/instructions", form: form %>
+    <%= form.submit 'Update instructions', class: "card-footer-item" %>
+  <% end %>
+</div>

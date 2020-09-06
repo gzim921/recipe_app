@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     get 'edit_ingredients', to: 'recipes#edit_ingredients'
   end
 
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+  get 'login', to: 'users#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

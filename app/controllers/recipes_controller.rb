@@ -2,7 +2,7 @@ class RecipesController < ApplicationController
   skip_before_action :require_login, only: [:index, :show]
   before_action :find_recipe, only: [:show, :edit, :update, :destroy]
   before_action :find_recipe_with_recipe_id, only: [:edit_ingredients, :edit_instructions]
-  before_action :correct_user?, except: [:index, :show, :new, :create]
+  before_action :is_user_valid?, except: [:index, :show, :new, :create]
 
   def index
     @recipes = Recipe.all
@@ -13,19 +13,17 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-
-    5.times { @recipe.ingredients.build }
-    5.times { @recipe.instructions.build }
+    6.times { @recipe.ingredients.build }
+    6.times { @recipe.instructions.build }
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = Recipe.new(recipes_params)
     @recipe.user = current_user
-
     if @recipe.save
-      redirect_to root_path
+      redirect_to user_recipe_path(@recipe.user, @recipe)
     else
-      render:new
+      render :new
     end
   end
 
@@ -43,7 +41,7 @@ class RecipesController < ApplicationController
   end
 
   def update
-    @recipe.update_attributes(recipe_params)
+    @recipe.update_attributes(recipes_params)
     if @recipe.save
       redirect_to user_recipe_path(@recipe.user, @recipe)
     else
@@ -53,13 +51,12 @@ class RecipesController < ApplicationController
 
   def destroy
     @recipe.destroy
-
     redirect_to root_path
   end
 
   private
 
-  def recipe_params
+  def recipes_params
     params.require(:recipe).permit(:title, :description,
     ingredients_attributes: [:id, :recipe_id, :body, :_destroy],
     instructions_attributes: [:id, :recipe_id, :body, :_destroy])
@@ -73,8 +70,8 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:recipe_id])
   end
 
-  def correct_user?
-    unless equal_with_current_user?(@recipe.user)
+  def is_user_valid?
+    unless equal_with_current_user(@recipe.user)
       flash[:warning] = 'Wrong user!'
       redirect_to user_path(@current_user) and return
     end

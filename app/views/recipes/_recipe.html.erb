@@ -1,88 +1,73 @@
-<div class="container is-fluid">
-  <div class="columns">
-    <div class="column is-8 is-offset-2">
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">
-            <%= recipe.title %>
-          </p>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            <%= recipe.description %>
-          </div>
-        </div>
-        <% if local_assigns[:show] %>
-          <footer class="card-footer">
-            <%= link_to "Back", root_path, class: "card-footer-item" %>
-          </footer>
-          <% if current_user %>
-            <footer class="card-footer">
-              <%= link_to "Delete", recipe_path(recipe), method: :delete, data: { confirm: 'Are you sure you want to delete this cocktail recipe?'}, class: "card-footer-item" %>
-            </footer>
-            <footer class="card-footer">
-              <%= link_to "Edit Recipe", edit_recipe_path, class: "card-footer-item" %>
-            </footer>
-          <% end %>
-          <div class="columns">
-            <div class="column is-5 is-offset-0">
-              <article class="panel is-success">
-                <p class="panel-heading">
-                  Ingredients needed for preparing
-                </p>
-                <p class="panel-tabs">
-                  <% recipe.ingredients.each do |ingredient| %>
-                    <ul>
-                      <li>
-                        <%= ingredient.body %>
-                      </li>
-                    </ul>
-                  <% end %>
-                </p>
-                <% if current_user %> 
-                  <footer class="card-footer">
-                    <%= link_to "Edit/Delete ingredientss", recipe_edit_ingredients_path(recipe), class: "card-footer-item" %>
-                  </footer>
-                <% end %>
-              </article>
-            </div>
-                
-            <div class="column is-5 is-offset-2">
-              <article class="panel is-success">
-                <p class="panel-heading">
-                  Instructions for preparing
-                </p>
-                <p class="panel-tabs">
-                  <% recipe.instructions.each do |instruction| %>
-                    <ul>
-                      <li>
-                        <%= instruction.body %>
-                      </li>
-                    </ul>
-                  <% end %>
-                </p>
-                <% if current_user %> 
-                  <footer class="card-footer">
-                    <%= link_to "Edit/Delete instructions", recipe_edit_instructions_path(recipe), class: "card-footer-item" %>
-                  </footer>
-                <% end %>
-              </article>
-            </div>
-          </div>
-        <% else %>
-          <%= link_to "Show", user_recipe_path(recipe.user, recipe), class: "card-footer-item" %>
-          <br>
-        <% end %>
+<div class="box">
+  <article class="media">
+    <div class="media-content">
+      <div class="content">
+        <h2><strong><%= recipe.title %></strong></h2>
       </div>
+      <br>
+      <div class="content">
+        <h2><%= recipe.description %></h2>
+      </div>
+      <% unless local_assigns[:show] %>
+        <%= link_to "Show", user_recipe_path(recipe.user, recipe), class: "button is-link is-light"%>
+        <% if equal_with_current_user(recipe.user) %>
+          <%= link_to "Edit Recipe", edit_recipe_path(recipe), class: "button is-link is-light" %>
+          <%= link_to "Delete", recipe_path(recipe), class: "button is-danger",
+          method: :delete, data: { confirm: 'Are you sure you want to delete this cocktail recipe?'}%>
+        <% end%>
+      <% else %>
+        <%= link_to "Back", root_path, class: "button is-link is-light"%>
+      <% end %>
     </div>
+  </article>
+</div>
+<div class="columns is-gapless">
+  <div class="column">
+    <h2><strong>Created by: <%= link_to "#{recipe.user.user_name}", user_path(recipe.user), class: "subtitle" %></h2>
   </div>
 </div>
-
-
-
-      
-
-
- 
-        
-
+<div class="columns is-mobile">
+  </div class="is-1">
+    <h2><%=time_ago_in_words(recipe.created_at) %> ago<h2>
+  </div>
+</div>
+<div class="columns is-centered">
+  <div class="column is-4">
+    <article class="panel is-success">
+      <p class="panel-heading">
+        Ingredients needed for preparing
+      </p>
+      <% recipe.ingredients.each do |ingredient| %>
+        <ul>
+          <li>
+            <%= ingredient.body %>
+          </li>
+        </ul>
+      <% end %>
+      <footer class="card-footer">
+        <% if equal_with_current_user(recipe.user) %>
+          <%= link_to "Edit/Delete ingredients", recipe_edit_ingredients_path(recipe), class: 'card-footer-item'%>
+        <% end %>
+      </footer>
+    </article>
+  </div>
+  <div class="column is-4">
+    <article class="panel is-success">
+      <p class="panel-heading">
+        Instructions for preparing
+      </p>
+      <% recipe.instructions.each do |instruction| %>
+        <ul>
+          <li>
+            <%= instruction.body %>
+          </li>
+        </ul>
+      <% end %>
+      <footer class="card-footer">
+        <% if equal_with_current_user(recipe.user) %>
+          <%= link_to "Edit/Delete instructions", recipe_edit_instructions_path(recipe), class: 'card-footer-item'%>
+        <% end %>
+      </footer>
+    </article>
+  </div>
+</div>

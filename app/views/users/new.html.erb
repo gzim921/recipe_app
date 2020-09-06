@@ -1,84 +1,23 @@
-<div class="container">
-  <div class="columns is-multiline">
-    <div class="column is-6 is-offset-3">
-      <div class="content is-size-3">
-        <h1>New User</h1>
-      </div>
+<div class='container mt-5'>
+  <div class="row text-center">
+    <div class="col-sm-8">
+      <body class="text-center bg-light">
+        <%= form_with url: login_path, scope: :session, local: true do |form| %>
+          <div class='container-fluid'>
+            <%= form.label :full_name, class: "sr-only" %>
+            <%= form.text_field :full_name, class: "form-control recipe-color mt-4", placeholder: "Full name" %>
+            <%= form.label :email, class: "sr-only" %>
+            <%= form.email_field :email, class: "form-control recipe-color mt-4", placeholder: "Email address" %>
+            <%= form.label :password, class: "sr-only" %>
+            <%= form.password_field :password, class: "form-control recipe-color mt-4", placeholder: "Password" %>
+            <%= form.submit "Log in", class: "btn btn-lg recipe-color btn-block mt-5 font-italic"%>
+          </div>
+        <%end%>
+      </body>
     </div>
-
-    <% if @user.errors.any? %>
-      <div class="column is-6 is-offset-3">
-        <article class="message is-danger">
-          <div class="message-body">
-            <p><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</p>
-            <br>
-            <p>
-            <% @user.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-            </p>
-          </div>
-        </article>
-      </div>
-    <% end %>
-
-    <div class="column is-6 is-offset-3">
-      <%= form_with model: @user, local: true do |form| %>
-        <div class="field">
-          <%= form.label :first_name, class: "label" %>
-          <div class="control">
-            <%= form.text_field :first_name, class: "input", placeholder: "Your first name"%>
-          </div>
-        </div>
-
-        <div class="field">
-          <%= form.label :last_name, class: "label" %>
-          <div class="control">
-            <%= form.text_field :last_name, class: "input", placeholder: "Your last name"%>
-          </div>
-        </div>
-
-        <div class="field">
-          <%= form.label :user_name, class: "label" %>
-          <div class="control">
-            <%= form.text_field :user_name, class: "input", placeholder: "Your user name"%>
-          </div>
-        </div>
-
-        <div class="field">
-          <%= form.label :email, class: "label" %>
-
-          <div class="control">
-            <%= form.email_field :email, class: "input", placeholder: 'Your email' %>
-          </div>
-        </div>
-
-        <div class="field">
-          <%= form.label :password, class: "label" %>
-
-          <div class="control">
-            <%= form.password_field :password, class: "input", placeholder: 'Your password' %>
-          </div>
-        </div>
-
-        <div class="field">
-          <%= form.label :password_confirmation, class: "label" %>
-
-          <div class="control">
-            <%= form.password_field :password_confirmation, class: "input", placeholder: 'Confirm password' %>
-          </div>
-        </div>
-
-
-        <div class="field is-grouped">
-          <div class="control">
-            <%= form.submit "Submit", class: "button is-link" %>
-          </div>
-          <div class="control">
-            <%= link_to "Cancel", recipes_path, class: 'button is-link is-light' %>
-          </div>
-        </div>
-      <% end %>
+    <div class="col-sm-4">
+      <%= render 'components/errors', model: @user %>
+      <%= render 'components/form', model: @user , button_name: "Sign up", heading: "Sign up", new: true %>
     </div>
   </div>
 </div>

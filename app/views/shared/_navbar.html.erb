@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="https://github.com/gzim921">
-      <img src="https://logos-download.com/wp-content/uploads/2019/06/Allrecipes_Logo_horizontally-700x256.png" width="112" height="28">
+      <img src="https://www.pngitem.com/pimgs/m/87-877725_recipes-png-transparent-png.png" width="112" height="50">
     </a>
 
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -10,25 +10,21 @@
       <span aria-hidden="true"></span>
     </a>
   </div>
-
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
       <%= link_to "Home", root_path, class: "navbar-item" %>
     </div>
-
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <% if logged_in? %>
-            <%= link_to 'New Recipe', new_recipe_path, class: "button is-primary" %>
-            <%= link_to "Sign out", logout_path,  method: :delete, class: "button is-light" %>
-          <% else %>
-            <%= link_to "Sign up", users_path, class: "button is-primary" %>
-            <%= link_to "Sign in", login_path, class: "button is-light" %>
-          <% end %>
-        </div>
+  </div>
+  <div class="navbar-end">
+    <div class="navbar-item">
+      <div class="buttons">
+        <% if current_user_present? %>
+          <%= link_to "New Recipe", new_recipe_path, class: "button is-primary" %>
+          <%= link_to "Log out", logout_path, method: :delete, class: "button is-primary" %>
+        <% else %>
+          <%= link_to "Log in", login_path, class: "button is-light" %>
+        <% end %>
       </div>
     </div>
   </div>
 </nav>
-
