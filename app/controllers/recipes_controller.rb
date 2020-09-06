@@ -1,8 +1,8 @@
 class RecipesController < ApplicationController
-  skip_before_action :require_login, only: [:index, :show]
-  before_action :find_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :find_recipe_with_recipe_id, only: [:edit_ingredients, :edit_instructions]
-  before_action :is_user_valid?, except: [:index, :show, :new, :create]
+  skip_before_action :require_login, only: %i[index show]
+  before_action :find_recipe, only: %i[show edit update destroy]
+  before_action :find_recipe_with_recipe_id, only: %i[edit_ingredients edit_instructions]
+  before_action :is_user_valid?, except: %i[index show new create]
 
   def index
     @recipes = Recipe.all
@@ -13,6 +13,7 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+
     6.times { @recipe.ingredients.build }
     6.times { @recipe.instructions.build }
   end
@@ -20,6 +21,7 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipes_params)
     @recipe.user = current_user
+
     if @recipe.save
       redirect_to user_recipe_path(@recipe.user, @recipe)
     else
@@ -42,6 +44,7 @@ class RecipesController < ApplicationController
 
   def update
     @recipe.update_attributes(recipes_params)
+
     if @recipe.save
       redirect_to user_recipe_path(@recipe.user, @recipe)
     else
@@ -57,9 +60,8 @@ class RecipesController < ApplicationController
   private
 
   def recipes_params
-    params.require(:recipe).permit(:title, :description,
-    ingredients_attributes: [:id, :recipe_id, :body, :_destroy],
-    instructions_attributes: [:id, :recipe_id, :body, :_destroy])
+    params.require(:recipe).permit(:title, :description, ingredients_attributes: %i[id recipe_id body _destroy],
+      instructions_attributes: %i[id recipe_id body _destroy])
   end
 
   def find_recipe

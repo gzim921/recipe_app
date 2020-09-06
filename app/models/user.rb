@@ -10,16 +10,16 @@ class User < ApplicationRecord
 
   has_secure_password
   
-  validates :full_name, presence: true, length: {minimum: MINIMUM_LENGTH}
+  validates :user_name, presence: true, length: { minimum: MINIMUM_LENGTH }
   validates :first_name, :last_name, presence: true
-  validates :email, uniqueness: {case_sensitive: true}, presence: true, format: {with: EMAIL_FORMAT }
+  validates :email, uniqueness: { case_sensitive: true }, presence: true, format: {with: EMAIL_FORMAT }
   validates :password, presence: true, length: {minimum: MINIMUM_LENGTH},
             format: {with: PASSWORD_FORMAT, :message => 'must contains and starts with letters(numbers can be used last!)'}
 
   private
 
   def name_capitalize
-    self.full_name = full_name.downcase.titleize
+    self.user_name = user_name.downcase.titleize
     self.first_name = first_name.downcase.capitalize
     self.last_name = last_name.downcase.capitalize
   end
@@ -28,4 +28,3 @@ class User < ApplicationRecord
     self.email = email.downcase
   end
 end
-
