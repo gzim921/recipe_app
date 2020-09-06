@@ -1,5 +1,5 @@
 <%= form.fields_for :instructions do |f| %>
-  <%= f.label :Instruction, class: "sr-only" %>
+  <%= f.label :Instruction, class: "label" %>
   <%= f.text_field :body, class: "input", placeholder: "Instruction" %>
   <%= f.check_box :_destroy %>
   <%= f.label "Delete", class: 'text-white' %>

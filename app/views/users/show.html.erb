@@ -1,18 +1,26 @@
-<div class=" mt-5">
-  <div class='container '>
-    <div class=" card rounded-circle recipe-color">
-      <div class="card-body text-center text-white mt-5">
-        <h3><strong><%= @user.user_name %>'s cocktail recipes</strong></h3>
+<div class='container'>
+  <div class="card">
+    <div class="card-content">
+      <div class="media-content">
+        <p class="title is-4"><strong><%= @user.user_name %>'s recipes</strong></p>
+        <p class="subtitle is-6"><%= @user.email %></p>
       </div>
-      <div class="card-body text-center">
-        <%= @user.email %>
-      </div>
-      <div class="card-body text-center">
-        <%= link_to "Back", root_path, class: "nav-link text-white"%>
+      <br>
+      <div class="content">
+        <%= link_to "Back", root_path, class: "button is-link is-light"%>
       </div>
     </div>
   </div>
 </div>
-<% @user.recipes.each do |recipe|%>
-  <%= render 'recipes/recipe', recipe: recipe %>
-<%end %>
+
+<br>
+
+<div class='container'>
+  <div class="columns">
+    <div class="column is-four-fifths">
+      <% @user.recipes.each do |recipe|%>
+        <%= render 'recipes/recipe', recipe: recipe %>
+      <%end %>
+    </div>
+  </div>
+</div>

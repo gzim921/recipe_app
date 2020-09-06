@@ -1,47 +1,77 @@
 <%= form_with model: model, local: true do |form| %>
   <div class='container'>
     <h1 class="title"><%= heading if local_assigns[:nested_form] %></h1>
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-12">
+      <div class="columns">
+        <div class="column is-4 is-offset-1">
           <% unless local_assigns[:nested_form] %>
-            <%= form.label :user_name, class: "sr-only " %>
-            <%= form.text_field :user_name, class: "input", placeholder: "Full name" %>
-            <%= form.label :first_name, class: "sr-only" %>
-            <%= form.text_field :first_name, class: "input", placeholder: "First name" %>
-            <%= form.label :last_name, class: "sr-only" %>
-            <%= form.text_field :last_name, class: "input", placeholder: "Last name" %>
-            <%= form.label :email, class: "sr-only" %>
-            <%= form.email_field :email, class: "input", placeholder: "Email adress" %>
-            <%= form.label :password, class: "sr-only" %>
-            <%= form.password_field :password, class: "input", placeholder: "Password" %>
-            <%= form.label :password_confirmation, class: "sr-only" %>
-            <%= form.password_field :password_confirmation, class: "input", placeholder: "Confirm password" %>
+            <div class="field">
+              <h1 class="title">Sign Up</h1>
+              <div class="control">
+                <%= form.label :user_name, class: "label" %>
+                <%= form.text_field :user_name, class: "input", placeholder: "User name" %>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <%= form.label :first_name, class: "label" %>
+                <%= form.text_field :first_name, class: "input", placeholder: "First name" %>
+              </div>
+            <div>
+            <div class="field">
+              <div class="control">  
+                <%= form.label :last_name, class: "label" %>
+                <%= form.text_field :last_name, class: "input", placeholder: "Last name" %>
+              </div>
+            </div>
+            <div class="field">    
+              <div class="control">   
+                <%= form.label :email, class: "label" %>
+                <%= form.email_field :email, class: "input", placeholder: "Email adress" %>
+              </div>
+            </div>
+            <div class="field"> 
+              <div class="control">
+                <%= form.label :password, class: "label" %>
+                <%= form.password_field :password, class: "input", placeholder: "Password" %>
+              </div>
+            </div>
+            <div class="field"> 
+              <div class="control">
+                <%= form.label :password_confirmation, class: "label" %>
+                <%= form.password_field :password_confirmation, class: "input", placeholder: "Confirm password" %>
+              </div>
+            </div>
           <% else %>
-            <%= render 'components/errors', model: model %>
-            <div class="field">
-              <label class="label">
-                <%= form.label :title, class: "sr-only" %>
-                <%= form.text_field :title, class: "input", placeholder: "Title" %>
-              </label>
-            </div>
-            <div class="field">
-              <label class="label">
-                <%= form.label :description, class: "sr-only" %>
-                <%= form.text_area :description, class: "textarea", placeholder: "Description" %>
-              <label>
-            </div>
-            <h1 class="title">Ingredient</h1>
-            <div class="field">
-              <label class="label">
-                <%= render "components/ingredients", form: form %>
-              </label>
-            </div>
-            <h1 class="title">Instruction</h1>
-            <div class="field">
-              <label class="label">
-                  <%= render "components/instructions", form: form %>
-              </label>
+            <div class='container'>
+              <div class="columns padding">
+                <div class="column is-12 is-offset-1">
+                  <%= render 'components/errors', model: model %>
+                  <div class="field">
+                    <label>
+                      <%= form.label :title, class: "label" %>
+                      <%= form.text_field :title, class: "input", placeholder: "Title" %>
+                    </label>
+                  </div>
+                  <div class="field">
+                    <label>
+                      <%= form.label :description, class: "label" %>
+                      <%= form.text_area :description, class: "textarea", placeholder: "Description" %>
+                    <label>
+                  </div>
+                  <h1 class="title">Ingredient</h1>
+                    <div class="field">
+                      <label>
+                        <%= render "components/ingredients", form: form %>
+                      </label>
+                    </div>
+                  <h1 class="title">Instruction</h1>
+                  <div class="field">
+                    <label>
+                      <%= render "components/instructions", form: form %>
+                    </label>
+                  </div>
+                </div>
+              </div>
             </div>
           <% end %>
           <%= form.submit button_name, class: "button is-link is-light"%>

@@ -1,20 +1,31 @@
-<div class='container mt-5'>
-  <div class="row text-center">
-    <div class="col-sm-8">
-      <body class="text-center bg-light">
-        <%= form_with url: login_path, scope: :session, local: true do |form| %>
-          <div class='container-fluid'>
-            <%= form.label :full_name, class: "sr-only" %>
-            <%= form.text_field :full_name, class: "form-control recipe-color mt-4", placeholder: "Full name" %>
-            <%= form.label :email, class: "sr-only" %>
-            <%= form.email_field :email, class: "form-control recipe-color mt-4", placeholder: "Email address" %>
-            <%= form.label :password, class: "sr-only" %>
-            <%= form.password_field :password, class: "form-control recipe-color mt-4", placeholder: "Password" %>
-            <%= form.submit "Log in", class: "btn btn-lg recipe-color btn-block mt-5 font-italic"%>
-          </div>
-        <%end%>
-      </body>
+<div class='container'>
+  <%= form_with url: login_path, scope: :session, local: true do |form| %>
+  <div class="columns is-one-quarter">
+    <div class="column is-4 is-offset-8">
+      <div class="field">
+        <div class="control">
+          <h1 class="title">Sign In</h1>
+          <%= form.label :user_name, class: "label" %>
+          <%= form.text_field :full_name, class: "input", placeholder: "User name" %>
+        </div>
+      </div>
+      <div class='field'>
+        <div class="control">
+          <%= form.label :email, class: "label" %>
+          <%= form.email_field :email, class: "input", placeholder: "Email address" %>
+        </div>
+      </div>
+      <div class='field'>
+        <div class="control">
+          <%= form.label :password, class: "label" %>
+          <%= form.password_field :password, class: "input", placeholder: "Password" %>
+        </div>
+      </div>
+      <%= form.submit "Log in", class: "button is-link is-light"%>
     </div>
+  </div>
+  <%end%>
+</div>
     <div class="col-sm-4">
       <%= render 'components/errors', model: @user %>
       <%= render 'components/form', model: @user , button_name: "Sign up", heading: "Sign up", new: true %>

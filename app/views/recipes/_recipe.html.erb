@@ -38,7 +38,7 @@
         Ingredients needed for preparing
       </p>
       <% recipe.ingredients.each do |ingredient| %>
-        <ul>
+        <ul class="left">
           <li>
             <%= ingredient.body %>
           </li>
@@ -57,7 +57,7 @@
         Instructions for preparing
       </p>
       <% recipe.instructions.each do |instruction| %>
-        <ul>
+        <ul class="left">
           <li>
             <%= instruction.body %>
           </li>

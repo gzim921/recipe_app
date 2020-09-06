@@ -3,6 +3,20 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 .columns.is-centered {
   margin-top: auto;
-  margin-left: 2.5em;
+  margin-left: 3.5em;
   margin-right: 3em;
+}
+
+.column.is-offset-1, .column.is-offset-1-tablet {
+  margin-top: -23.9em;
+}
+
+
+.left {
+  padding-left: 1em;
+  padding-top: 1em;
+}
+
+.columns.padding {
+  margin-top: 200%;
 }
